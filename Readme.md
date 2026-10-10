@@ -1,418 +1,94 @@
-🍽️ SpiceKart — Online Food Ordering System
-
-«[ A Modern & Interactive Food Ordering Website ]»
-
-SpiceKart is a responsive online food ordering web application built using HTML, CSS, and JavaScript. It provides users with an attractive food menu, category filtering, search functionality, favorites, shopping cart, checkout, login, order tracking, and customer reviews.
-
----
-
-✨ Features
-
-🍴 Food Menu
-
-- [x] 15+ food items
-- [x] South Indian dishes
-- [x] North Indian dishes
-- [x] Non-Vegetarian dishes
-- [x] Desserts
-- [x] Italian desserts
-- [x] Food-specific images
-- [x] Ratings and customer reviews
-
-🔍 Search & Filtering
-
-- [x] Search food by name
-- [x] Search by cuisine
-- [x] Search by description
-- [x] Filter food by category
-- [x] "No food found" message
-
-❤️ Favorites
-
-- [x] Add food to favorites
-- [x] Remove food from favorites
-- [x] Favorite item counter
-- [x] Favorite status displayed on food cards
-
-🛒 Shopping Cart
-
-- [x] Add items to cart
-- [x] Increase quantity
-- [x] Decrease quantity
-- [x] Remove items
-- [x] Automatic price calculation
-- [x] Cart item counter
-- [x] Empty cart message
-
-📦 Checkout
-
-- [x] Customer name validation
-- [x] Indian mobile number validation
-- [x] Delivery address
-- [x] Payment method selection
-- [x] Automatic order ID generation
-- [x] Order confirmation
-
-🚚 Order Tracking
-
-- [x] Order confirmation
-- [x] Preparing status
-- [x] Picked-up status
-- [x] Delivered status
-- [x] Generated order number
-
-👤 Login
-
-- [x] Email input
-- [x] Password input
-- [x] Basic login validation
-- [x] Login success notification
-
-⭐ Customer Reviews
-
-- [x] Overall customer reviews
-- [x] Food-specific reviews
-- [x] Star ratings
-- [x] Review section
-
----
-
-🖥️ Technologies Used
-
-Technology| Purpose
-🟧 HTML5| Website structure
-🎨 CSS3| Styling and responsive design
-🟨 JavaScript| Functionality and interaction
-🖼️ Unsplash / Wikimedia Commons| Food images
-
----
-
-📁 Project Structure
-
-SpiceKart/
-│
-├── 📄 index.html
-│
-└── 📄 README.md
-
-«Note: The complete project is currently contained in a single "index.html" file with HTML, CSS, and JavaScript included internally.»
-
----
-
-🎨 Website Sections
-
-┌─────────────────────────────────────────┐
-│              🍽️ SpiceKart              │
-├─────────────────────────────────────────┤
-│ 🔍 Search     ❤️ Favorites   🛒 Cart   │
-├─────────────────────────────────────────┤
-│                                         │
-│        Delicious Food                   │
-│        Delivered To You                 │
-│                                         │
-│             [ Order Now ]               │
-│                                         │
-├─────────────────────────────────────────┤
-│              🍴 Food Menu               │
-├─────────────────────────────────────────┤
-│ All | South Indian | North Indian       │
-│ Non-Veg | Desserts | Italian            │
-├─────────────────────────────────────────┤
-│                                         │
-│   🍛 Food Card   🍕 Food Card           │
-│   🍰 Food Card   🥘 Food Card           │
-│                                         │
-├─────────────────────────────────────────┤
-│          ⭐ Customer Reviews            │
-├─────────────────────────────────────────┤
-│             📞 Contact                  │
-└─────────────────────────────────────────┘
-
----
-
-🍛 Available Food Categories
-
-🇮🇳 South Indian
-
-- Idli Sambar
-- Medu Vada
-- Masala Dosa
-
-🥘 North Indian
-
-- Samosa
-- Paneer Tikka
-- Biryani
-- Dal Makhani
-- Chole Bhature
-- Garlic Naan & Curry
-
-🍗 Non-Veg
-
-- Butter Chicken
-
-🍰 Desserts
-
-- Gajar Halwa
-- Gulab Jamun
-- Rasmalai
-- Chocolate Brownie
-
-🇮🇹 Italian
-
-- Italian Tiramisu
-
----
-
-⚙️ Main JavaScript Functions
-
-The application uses JavaScript functions to provide interactive features.
-
-┌──────────────────────────┐
-│     JavaScript Logic     │
-├──────────────────────────┤
-│ renderFoods()            │
-│ filterCategory()         │
-│ searchFood()             │
-│ toggleFavorite()         │
-│ addToCart()              │
-│ changeQuantity()         │
-│ removeFromCart()         │
-│ openCart()               │
-│ renderCart()             │
-│ openCheckout()           │
-│ placeOrder()             │
-│ showDetails()            │
-│ openLogin()              │
-│ login()                  │
-│ showToast()              │
-└──────────────────────────┘
-
----
-
-📱 Responsive Design
-
-SpiceKart is designed to work across different screen sizes.
-
-💻 Desktop
-   ↓
-📱 Tablet
-   ↓
-📲 Mobile
-
-The website uses CSS media queries to automatically adjust:
-
-- Navigation
-- Food card layout
-- Hero section
-- Review section
-- Footer
-- Search bar
-- Images
-- Modal windows
-
----
-
-🖼️ Image Handling
-
-Each food item has its own image URL.
-
-The project also includes an image fallback system.
-
-If an external food image fails to load:
-
-Image unavailable
-        ↓
-     🍽️
-        ↓
-Food Name
-        ↓
-"Food image unavailable"
-
-This prevents the website from incorrectly displaying another food's image.
-
----
-
-🛒 Order Flow
-
-The basic ordering process is:
-
-[ Browse Menu ]
-       ↓
-[ Search / Filter ]
-       ↓
-[ Select Food ]
-       ↓
-[ Add to Cart ]
-       ↓
-[ View Cart ]
-       ↓
-[ Checkout ]
-       ↓
-[ Enter Details ]
-       ↓
-[ Select Payment ]
-       ↓
-[ Place Order ]
-       ↓
-[ Order Confirmed ]
-       ↓
-[ Track Order ]
-
----
-
-🔐 Form Validation
-
-The checkout form validates:
-
-✓ Customer Name
-✓ 10-Digit Mobile Number
-✓ Delivery Address
-✓ Payment Method
-
-The mobile number follows the Indian format:
-
-[ 6-9XXXXXXXX ]
-
-Example:
-
-9876543210
-
----
-
-🚀 How to Run the Project
-
-Step 1 — Download the Project
-
-Download or clone the SpiceKart project.
-
-Step 2 — Open the Project
-
-Open the project folder in:
-
-- VS Code
-- Sublime Text
-- Notepad++
-- Any HTML-supported IDE
-
-Step 3 — Open "index.html"
-
-Simply open:
-
-index.html
-
-in your web browser.
-
-Step 4 — Start Ordering 🍽️
-
-Open Website
-     ↓
-Browse Food
-     ↓
-Add to Cart
-     ↓
-Checkout
-     ↓
-Place Order
-
----
-
-🌐 Browser Compatibility
-
-SpiceKart works with modern browsers such as:
-
-Browser| Support
-🌐 Google Chrome| ✅
-🦊 Firefox| ✅
-🧭 Microsoft Edge| ✅
-🍎 Safari| ✅
-📱 Mobile Browsers| ✅
-
----
-
-📌 Important Note
-
-This project is a frontend demonstration project.
-
-The following features are simulated using JavaScript:
-
-- Login
-- Payment
-- Order placement
-- Order tracking
-- Favorites
-- Cart management
-
-There is currently no backend database or real payment gateway connected.
-
----
-
-🔮 Future Improvements
-
-Possible future upgrades include:
-
-┌──────────────────────────────────────┐
-│          Future Enhancements         │
-├──────────────────────────────────────┤
-│ 🔐 Real User Authentication          │
-│ 🗄️ Database Integration              │
-│ 💳 Online Payment Gateway            │
-│ 📍 Live Delivery Tracking            │
-│ 👨‍🍳 Restaurant/Admin Dashboard       │
-│ 📦 Order History                     │
-│ 🔔 Order Notifications               │
-│ 🧾 Digital Invoice                  │
-│ ⭐ User Review Submission             │
-│ 🌙 Dark Mode                         │
-│ 📱 Progressive Web App               │
-└──────────────────────────────────────┘
-
----
+◈ Q-Sentinel — Quantum-Aware Document Security
+
+Q-Sentinel is a web-based document security prototype designed to demonstrate secure digital document signing, signature analysis, risk-based authentication, and document integrity verification.
+
+🚀 Features
+
+- User Profile: Create a profile using your name, Gmail address, phone number, and optional location.
+- Document Upload: Upload a document or use the built-in sample document.
+- Digital Signature: Draw a signature directly on the webpage.
+- Signature Analysis: Analyze signature complexity and calculate a demo risk score.
+- Risk-Based Authentication: Demonstrate OTP verification and additional security checks based on the risk level.
+- Document Integrity: Generate a SHA-256 hash to help verify whether a document matches a previously recorded version.
+- Threat-Aware Security: Simulate suspicious sessions and demonstrate security alerts.
+- Digital Twin: Track basic typing and pointer interaction events.
+- Quantum-Safe Migration Lab: Demonstrate RSA-PSS signature verification and explain a possible migration path to post-quantum cryptography.
+- Audit Trail: Export security events and document verification records.
+- Responsive Design: Use the interface on desktop and mobile devices.
+
+🛠️ Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- Web Crypto API
+- HTML Canvas API
+- Browser Local Storage
+- GitHub Pages
+
+⚙️ How to Run
+
+1. Clone or download this repository.
+2. Open "index.html" in a browser, or deploy it using GitHub Pages.
+3. Create your demo profile.
+4. Upload a document or select the sample document.
+5. Draw your signature and click Analyze signature & risk.
+6. Complete the displayed demo authentication steps.
+7. Finish the signing workflow and download the verification record.
+8. Use the Security Center to explore integrity verification and audit features.
+
+🔐 Security Workflow
+
+1. Profile Enrollment — Enter basic user details.
+2. Document Selection — Upload a document for the signing workflow.
+3. Signature Capture — Draw a signature on the canvas.
+4. Risk Assessment — Calculate a demonstration risk score.
+5. Step-Up Authentication — Complete the demo OTP and any additional checks required by the risk level.
+6. Integrity Record — Generate a SHA-256 document hash and save a local verification record.
+7. Audit and Verification — Export the audit trail and compare document hashes.
+
+💡 Novelty
+
+Q-Sentinel combines several document-security concepts in a single prototype:
+
+- Risk-based authentication that demonstrates different verification steps for different risk levels.
+- Signature complexity analysis as an additional risk signal.
+- A simulated Digital Twin using basic user interaction events.
+- Document integrity records using SHA-256 hashing.
+- A quantum-safe migration demonstration to introduce post-quantum cryptography.
+
+⚠️ Limitations
+
+This is a hackathon prototype, not a production-ready document-signing service.
+
+- OTPs are generated and displayed locally; real SMS or email delivery is not implemented.
+- Face verification, biometric verification, and administrator approval are simulated.
+- Signature complexity analysis does not establish the signer's identity.
+- SHA-256 hashing detects differences only when compared against a trusted reference hash.
+- RSA-PSS is classical cryptography, not post-quantum cryptography.
+- Post-quantum signing algorithms are described but are not implemented.
+- User information and records are stored locally in the browser.
+- The downloaded JSON record does not make the original document a legally binding digital signature.
+
+Do not use confidential documents or real authentication credentials in this demo.
+
+🔮 Future Enhancements
+
+- Integrate real email/SMS OTP delivery.
+- Add secure server-side authentication and authorization.
+- Implement trusted digital-signature standards.
+- Add verified biometric authentication where appropriate.
+- Integrate a vetted post-quantum cryptography library.
+- Store audit logs securely on a backend.
+- Add tamper-evident document records and secure key management.
 
 👩‍💻 Project Information
 
-┌─────────────────────────────────────┐
-│          🍽️ SPICEKART               │
-├─────────────────────────────────────┤
-│ Project Type : Food Ordering System │
-│ Frontend     : HTML + CSS + JS      │
-│ Design       : Responsive           │
-│ Status       : Completed            │
-└─────────────────────────────────────┘
+Project Name: Q-Sentinel
+Category: AI-Assisted Document Security Prototype
+Platform: Web Application
+Status: Hackathon MVP / Prototype
 
 ---
 
-❤️ Why SpiceKart?
-
-SpiceKart is designed to provide a simple and attractive food-ordering experience.
-
-«"Good food. Simple ordering. Happy customers." 🍽️»
-
----
-
-📜 License
-
-This project is created for educational and project demonstration purposes.
-
-You are free to modify and improve the project for learning purposes.
-
----
-
-⭐ Show Your Support
-
-If you like this project:
-
-⭐ Star the repository
-🍴 Fork the project
-💻 Improve the code
-📢 Share it with others
-
----
-
-<div align="center">🍽️ SpiceKart
-
-[ Delicious Food • Easy Ordering • Happy Customers ]
-
-Made with ❤️ using HTML • CSS • JavaScript
-
-</div>
+Q-Sentinel aims to demonstrate how risk-aware verification, document integrity checks, and quantum-safe migration planning can work together in a document-security workflow.
