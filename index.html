@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpiceKart - Online Food Ordering</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#fff8f3;
+    color:#292929;
+}
+
+button,input,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:white;
+    box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+
+.navbar{
+    max-width:1250px;
+    margin:auto;
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:10px 18px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    color:#e0442e;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#f39c12;
+}
+
+.search-box{
+    flex:1;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding:13px 48px 13px 18px;
+    border:1px solid #ddd;
+    border-radius:30px;
+    outline:none;
+    background:#fafafa;
+}
+
+.search-box button{
+    position:absolute;
+    right:7px;
+    top:6px;
+    border:0;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#fff;
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    white-space:nowrap;
+}
+
+.nav-btn{
+    border:0;
+    background:none;
+    font-weight:600;
+    color:#444;
+}
+
+.nav-btn:hover{
+    color:#e0442e;
+}
+
+.hero{
+    background:linear-gradient(120deg,#fff0e5,#fff8ed);
+    padding:55px 20px;
+}
+
+.hero-content{
+    max-width:1150px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    align-items:center;
+    gap:35px;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:#e0442e;
+}
+
+.hero p{
+    font-size:18px;
+    color:#666;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.hero-btn{
+    border:0;
+    background:#e0442e;
+    color:white;
+    padding:14px 24px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+.hero-image{
+    height:300px;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:35px 18px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.section-title h2{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.section-title p{
+    color:#777;
+}
+
+.filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-bottom:30px;
+}
+
+.filter-btn{
+    border:1px solid #ddd;
+    background:white;
+    padding:10px 17px;
+    border-radius:25px;
+    transition:.2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active{
+    background:#e0442e;
+    color:white;
+    border-color:#e0442e;
+}
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.food-card{
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,.09);
+    transition:.25s;
+    position:relative;
+}
+
+.food-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,.14);
+}
+
+.food-image-wrap{
+    height:210px;
+    position:relative;
+    overflow:hidden;
+    background:#f2eee9;
+}
+
+.food-image{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.favorite{
+    position:absolute;
+    right:12px;
+    top:12px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:0;
+    background:rgba(255,255,255,.9);
+    font-size:19px;
+}
+
+.favorite.active{
+    color:#e0442e;
+}
+
+.food-info{
+    padding:17px;
+}
+
+.food-info h3{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.description{
+    color:#666;
+    font-size:14px;
+    line-height:1.45;
+    min-height:42px;
+}
+
+.tags{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    margin:12px 0;
+}
+
+.tag{
+    background:#eef5e7;
+    color:#587044;
+    padding:5px 9px;
+    border-radius:12px;
+    font-size:12px;
+}
+
+.rating{
+    color:#c48a16;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.rating span{
+    color:#666;
+}
+
+.card-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.price{
+    font-size:20px;
+    font-weight:800;
+}
+
+.add-btn{
+    border:0;
+    background:#e0442e;
+    color:white;
+    padding:9px 16px;
+    border-radius:8px;
+    font-weight:700;
+}
+
+.review-link{
+    display:block;
+    border:0;
+    background:none;
+    color:#9a5a4f;
+    padding:0;
+    margin-bottom:10px;
+    font-size:13px;
+}
+
+.empty{
+    text-align:center;
+    padding:50px;
+    color:#777;
+    grid-column:1/-1;
+}
+
+.review-section{
+    background:#fff;
+}
+
+.reviews-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.review-card{
+    background:white;
+    border-radius:15px;
+    padding:22px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.review-stars{
+    color:#d59b18;
+    margin-bottom:10px;
+}
+
+.review-card p{
+    color:#555;
+    line-height:1.5;
+}
+
+.review-card strong{
+    display:block;
+    margin-top:14px;
+}
+
+footer{
+    background:#252525;
+    color:white;
+    padding:40px 20px;
+    margin-top:30px;
+}
+
+.footer-content{
+    max-width:1150px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:30px;
+}
+
+footer h3{
+    margin-bottom:12px;
+}
+
+footer p{
+    color:#ccc;
+    line-height:1.6;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    width:min(600px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:18px;
+    padding:25px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:15px;
+    top:12px;
+    border:0;
+    background:none;
+    font-size:27px;
+}
+
+.modal-box h2{
+    margin-bottom:18px;
+}
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:600;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+}
+
+.primary-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:9px;
+    background:#e0442e;
+    color:white;
+    font-weight:700;
+}
+
+.cart-item{
+    display:flex;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+    align-items:center;
+}
+
+.cart-item img{
+    width:70px;
+    height:65px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.cart-details{
+    flex:1;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:7px;
+}
+
+.qty button{
+    width:28px;
+    height:28px;
+    border:1px solid #ddd;
+    background:#fff;
+    border-radius:5px;
+}
+
+.remove{
+    border:0;
+    background:none;
+    color:#d33;
+    font-size:13px;
+}
+
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    font-weight:800;
+    padding:18px 0;
+}
+
+.tracking{
+    padding:15px 0;
+}
+
+.track-line{
+    display:flex;
+    justify-content:space-between;
+    position:relative;
+    margin:30px 0;
+}
+
+.track-line:before{
+    content:"";
+    position:absolute;
+    left:7%;
+    right:7%;
+    top:17px;
+    height:4px;
+    background:#ddd;
+    z-index:0;
+}
+
+.track-step{
+    text-align:center;
+    position:relative;
+    z-index:1;
+    width:25%;
+}
+
+.track-circle{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#ddd;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto auto 8px;
+    font-weight:bold;
+}
+
+.track-step.done .track-circle{
+    background:#e0442e;
+}
+
+.detail-image{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#222;
+    color:white;
+    padding:13px 18px;
+    border-radius:9px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:3000;
+}
+
+.toast.show{
+    opacity:1;
+}
+
+.cart-badge{
+    background:#e0442e;
+    color:white;
+    border-radius:12px;
+    padding:2px 6px;
+    font-size:11px;
+    vertical-align:top;
+}
+
+@media(max-width:1050px){
+    .food-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:800px){
+    .hero-content{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .food-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .reviews-grid,
+    .footer-content{
+        grid-template-columns:1fr;
+    }
+
+    .nav-actions{
+        gap:8px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+}
+
+@media(max-width:550px){
+    .navbar{
+        flex-wrap:wrap;
+    }
+
+    .search-box{
+        order:3;
+        flex-basis:100%;
+    }
+
+    .food-grid{
+        grid-template-columns:1fr;
+    }
+
+    .food-image-wrap{
+        height:230px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">Spice<span>Kart</span> 🍽️</div>
+
+        <div class="search-box">
+            <input id="searchInput" type="text"
+                   placeholder="Search dosa, biryani, paneer tikka...">
+            <button onclick="searchFood()">🔍</button>
+        </div>
+
+        <div class="nav-actions">
+            <button class="nav-btn" onclick="showFavorites()">
+                ❤️ Favorites <span id="favCount">0</span>
+            </button>
+
+            <button class="nav-btn" onclick="openLogin()">
+                👤 Login
+            </button>
+
+            <button class="nav-btn" onclick="openCart()">
+                🛒 Cart <span id="cartCount">0</span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div>
+            <h1>Delicious food,<br><span>delivered to you.</span></h1>
+            <p>
+                Order your favourite South Indian, North Indian,
+                Chinese and continental dishes from SpiceKart.
+            </p>
+            <button class="hero-btn" onclick="document.getElementById('menu').scrollIntoView()">
+                Order Now
+            </button>
+        </div>
+
+        <div class="hero-image">
+            <img
+                src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=1000&q=85"
+                alt="Indian food">
+        </div>
+    </div>
+</section>
+
+<main id="menu" class="container">
+
+    <div class="section-title">
+        <h2>Our Food Menu</h2>
+        <p>Every dish has its own correct food photograph.</p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterCategory('all',this)">All</button>
+        <button class="filter-btn" onclick="filterCategory('South Indian',this)">South Indian</button>
+        <button class="filter-btn" onclick="filterCategory('North Indian',this)">North Indian</button>
+        <button class="filter-btn" onclick="filterCategory('Non-Veg',this)">Non-Veg</button>
+        <button class="filter-btn" onclick="filterCategory('Dessert',this)">Desserts</button>
+        <button class="filter-btn" onclick="filterCategory('Italian',this)">Italian</button>
+    </div>
+
+    <div id="foodGrid" class="food-grid"></div>
+</main>
+
+<section class="review-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Customer Reviews</h2>
+            <p>What our customers say about SpiceKart</p>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p>
+                    The masala dosa was crispy and delicious. Delivery was
+                    fast and the food arrived hot.
+                </p>
+                <strong>— Priya R.</strong>
+            </div>
+
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p>
+                    I ordered Paneer Tikka and Gulab Jamun. Both were
+                    excellent and freshly packed.
+                </p>
+                <strong>— Arjun K.</strong>
+            </div>
+
+            <div class="review-card">
+                <div class="review-stars">★★★★☆</div>
+                <p>
+                    Great variety of Indian food. The Chole Bhature was
+                    especially tasty.
+                </p>
+                <strong>— Divya S.</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div>
+            <h3>SpiceKart 🍽️</h3>
+            <p>
+                Your online food ordering system for delicious meals,
+                desserts and snacks.
+            </p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <p>Home</p>
+            <p>Menu</p>
+            <p>Customer Reviews</p>
+        </div>
+
+        <div>
+            <h3>Contact</h3>
+            <p>📞 +91 98765 43210</p>
+            <p>📧 support@spicekart.com</p>
+            <p>📍 Coimbatore, Tamil Nadu</p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- CART MODAL -->
+<div id="cartModal" class="modal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal('cartModal')">×</button>
+        <h2>🛒 Your Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total">
+            <span>Total</span>
+            <span id="cartTotal">₹0</span>
+        </div>
+
+        <button class="primary-btn" onclick="openCheckout()">
+            Proceed to Checkout
+        </button>
+    </div>
+</div>
+
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal('loginModal')">×</button>
+        <h2>👤 Login</h2>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input id="loginEmail" type="email" placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input id="loginPassword" type="password" placeholder="Enter password">
+        </div>
+
+        <button class="primary-btn" onclick="login()">
+            Login
+        </button>
+    </div>
+</div>
+
+
+<!-- CHECKOUT MODAL -->
+<div id="checkoutModal" class="modal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal('checkoutModal')">×</button>
+        <h2>📦 Checkout</h2>
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input id="customerName" placeholder="Enter your name">
+        </div>
+
+        <div class="form-group">
+            <label>10-digit Mobile Number</label>
+            <input id="customerPhone"
+                   maxlength="10"
+                   inputmode="numeric"
+                   placeholder="9876543210">
+        </div>
+
+        <div class="form-group">
+            <label>Delivery Address</label>
+            <input id="customerAddress"
+                   placeholder="Enter delivery address">
+        </div>
+
+        <div class="form-group">
+            <label>Payment Method</label>
+            <select id="paymentMethod">
+                <option>Cash on Delivery</option>
+                <option>UPI</option>
+                <option>Card</option>
+            </select>
+        </div>
+
+        <button class="primary-btn" onclick="placeOrder()">
+            Place Order
+        </button>
+    </div>
+</div>
+
+
+<!-- TRACKING MODAL -->
+<div id="trackingModal" class="modal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal('trackingModal')">×</button>
+
+        <h2>🚚 Track Your Order</h2>
+
+        <p id="orderMessage">
+            Your order has been placed successfully!
+        </p>
+
+        <div class="tracking">
+            <div class="track-line">
+
+                <div class="track-step done">
+                    <div class="track-circle">✓</div>
+                    <small>Confirmed</small>
+                </div>
+
+                <div class="track-step done">
+                    <div class="track-circle">✓</div>
+                    <small>Preparing</small>
+                </div>
+
+                <div class="track-step done">
+                    <div class="track-circle">✓</div>
+                    <small>Picked Up</small>
+                </div>
+
+                <div class="track-step">
+                    <div class="track-circle">4</div>
+                    <small>Delivered</small>
+                </div>
+
+            </div>
+        </div>
+
+        <button class="primary-btn" onclick="closeModal('trackingModal')">
+            Continue Shopping
+        </button>
+    </div>
+</div>
+
+
+<!-- DETAILS MODAL -->
+<div id="detailsModal" class="modal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal('detailsModal')">×</button>
+
+        <img id="detailImage" class="detail-image" src="" alt="Food">
+
+        <h2 id="detailName"></h2>
+        <p id="detailDescription"></p>
+
+        <div class="tags" id="detailTags"></div>
+
+        <h3 id="detailPrice"></h3>
+
+        <br>
+
+        <h3>Customer Reviews</h3>
+        <p id="detailReview"></p>
+
+        <br>
+
+        <button id="detailAddButton" class="primary-btn">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   FOOD DATABASE
+   IMPORTANT:
+   Every item has its OWN food-specific image.
+   No food shares another food's image.
+   ========================================================= */
+
+const foods = [
+
+{
+    id:1,
+    name:"Idli Sambar",
+    category:"South Indian",
+    cuisine:"South Indian",
+    price:80,
+    unit:"plate",
+    rating:4.7,
+    ratings:183,
+    description:"Soft steamed idlis served with hot sambar and coconut chutney.",
+    image:"https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85",
+    review:"Soft, fresh and perfect with the sambar."
+},
+
+{
+    id:2,
+    name:"Medu Vada",
+    category:"South Indian",
+    cuisine:"South Indian",
+    price:70,
+    unit:"plate",
+    rating:4.8,
+    ratings:176,
+    description:"Crispy golden urad-dal vadas served with sambar and chutney.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Medu_Vada.jpg",
+    review:"Crispy outside and soft inside. Very tasty!"
+},
+
+{
+    id:3,
+    name:"Masala Dosa",
+    category:"South Indian",
+    cuisine:"South Indian",
+    price:100,
+    unit:"plate",
+    rating:4.9,
+    ratings:231,
+    description:"Crispy dosa filled with spiced potato masala.",
+    image:"https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=900&q=85",
+    review:"Very crispy dosa with delicious potato masala."
+},
+
+{
+    id:4,
+    name:"Samosa",
+    category:"North Indian",
+    cuisine:"North Indian",
+    price:50,
+    unit:"2 pieces",
+    rating:4.8,
+    ratings:205,
+    description:"Crispy pastry filled with spicy potato and peas.",
+    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
+    review:"Crispy and nicely spiced."
+},
+
+{
+    id:5,
+    name:"Paneer Tikka",
+    category:"North Indian",
+    cuisine:"North Indian",
+    price:180,
+    unit:"plate",
+    rating:4.8,
+    ratings:214,
+    description:"Grilled paneer cubes marinated with Indian spices and vegetables.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Barbequed_Paneer_Tikka.jpg",
+    review:"The paneer was perfectly grilled and full of flavour."
+},
+
+{
+    id:6,
+    name:"Biryani",
+    category:"North Indian",
+    cuisine:"Indian",
+    price:220,
+    unit:"bowl",
+    rating:4.9,
+    ratings:310,
+    description:"Fragrant basmati rice cooked with aromatic spices.",
+    image:"https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=900&q=85",
+    review:"Aromatic, spicy and absolutely delicious."
+},
+
+{
+    id:7,
+    name:"Dal Makhani",
+    category:"North Indian",
+    cuisine:"North Indian",
+    price:160,
+    unit:"bowl",
+    rating:4.7,
+    ratings:158,
+    description:"Creamy slow-cooked black lentils finished with butter.",
+    image:"https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85",
+    review:"Creamy and rich. Goes perfectly with naan."
+},
+
+{
+    id:8,
+    name:"Butter Chicken",
+    category:"Non-Veg",
+    cuisine:"North Indian",
+    price:240,
+    unit:"bowl",
+    rating:4.8,
+    ratings:245,
+    description:"Tender chicken cooked in a creamy buttery tomato gravy.",
+    image:"https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85",
+    review:"Rich gravy and tender chicken."
+},
+
+{
+    id:9,
+    name:"Chole Bhature",
+    category:"North Indian",
+    cuisine:"North Indian",
+    price:150,
+    unit:"plate",
+    rating:4.6,
+    ratings:164,
+    description:"Spiced chickpeas served with fluffy deep-fried bhature.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Chole_Bhature_1.jpg",
+    review:"The bhature was fluffy and the chole was delicious."
+},
+
+{
+    id:10,
+    name:"Garlic Naan & Curry",
+    category:"North Indian",
+    cuisine:"North Indian",
+    price:170,
+    unit:"plate",
+    rating:4.7,
+    ratings:142,
+    description:"Fresh garlic naan served with a rich Indian curry.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Garlic_naan.jpg",
+    review:"Soft garlic naan with a flavourful curry."
+},
+
+{
+    id:11,
+    name:"Gajar Halwa",
+    category:"Dessert",
+    cuisine:"Indian",
+    price:90,
+    unit:"bowl",
+    rating:4.7,
+    ratings:128,
+    description:"Traditional carrot halwa cooked with milk, sugar and nuts.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Gajar_halwa.JPG",
+    review:"Warm, sweet and full of carrot flavour."
+},
+
+{
+    id:12,
+    name:"Gulab Jamun",
+    category:"Dessert",
+    cuisine:"Indian",
+    price:80,
+    unit:"4 pieces",
+    rating:4.9,
+    ratings:219,
+    description:"Soft milk dumplings soaked in fragrant sugar syrup.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Gulab_Jamuns.jpg",
+    review:"Soft, juicy and perfectly sweet."
+},
+
+{
+    id:13,
+    name:"Rasmalai",
+    category:"Dessert",
+    cuisine:"Indian",
+    price:110,
+    unit:"2 pieces",
+    rating:4.8,
+    ratings:147,
+    description:"Soft cottage-cheese dumplings soaked in chilled saffron milk.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Rasmalai_-_01.JPG",
+    review:"Creamy, soft and refreshing."
+},
+
+{
+    id:14,
+    name:"Chocolate Brownie",
+    category:"Dessert",
+    cuisine:"Continental",
+    price:120,
+    unit:"piece",
+    rating:4.7,
+    ratings:132,
+    description:"Rich chocolate brownie with a soft fudgy centre.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Chocolate_brownie.jpg",
+    review:"Fudgy and chocolaty."
+},
+
+{
+    id:15,
+    name:"Italian Tiramisu",
+    category:"Italian",
+    cuisine:"Italian",
+    price:180,
+    unit:"slice",
+    rating:4.6,
+    ratings:101,
+    description:"Coffee-soaked ladyfingers layered with mascarpone and cocoa.",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Tiramisu_dessert.jpg",
+    review:"Creamy with a lovely coffee flavour."
+}
+
+];
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let cart = [];
+let favorites = [];
+let activeCategory = "all";
+
+
+/* =========================================================
+   IMAGE FALLBACK
+   IMPORTANT:
+   If an external image fails, DO NOT show another food.
+   Show a clearly labelled fallback instead.
+   ========================================================= */
+
+function foodFallback(name){
+
+    const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="900"
+         height="600"
+         viewBox="0 0 900 600">
+
+        <rect width="900" height="600" fill="#f5eee7"/>
+
+        <circle cx="450" cy="270" r="150"
+                fill="#fff"
+                stroke="#e0442e"
+                stroke-width="8"/>
+
+        <text x="450"
+              y="250"
+              text-anchor="middle"
+              font-size="80">
+              🍽️
+        </text>
+
+        <text x="450"
+              y="360"
+              text-anchor="middle"
+              font-family="Arial"
+              font-size="38"
+              font-weight="bold"
+              fill="#333">
+              ${name}
+        </text>
+
+        <text x="450"
+              y="410"
+              text-anchor="middle"
+              font-family="Arial"
+              font-size="22"
+              fill="#777">
+              Food image unavailable
+        </text>
+    </svg>`;
+
+    return "data:image/svg+xml;charset=UTF-8," +
+           encodeURIComponent(svg);
+}
+
+
+/* =========================================================
+   RENDER FOOD
+   ========================================================= */
+
+function renderFoods(){
+
+    const grid = document.getElementById("foodGrid");
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    let filtered = foods.filter(food => {
+
+        const matchesCategory =
+            activeCategory === "all" ||
+            food.category === activeCategory;
+
+        const matchesSearch =
+            !search ||
+            food.name.toLowerCase().includes(search) ||
+            food.description.toLowerCase().includes(search) ||
+            food.cuisine.toLowerCase().includes(search);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    if(filtered.length === 0){
+
+        grid.innerHTML = `
+            <div class="empty">
+                <h3>😔 No food found</h3>
+                <p>Try searching for another dish.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    grid.innerHTML = filtered.map(food => {
+
+        const isFavorite = favorites.includes(food.id);
+
+        return `
+        <article class="food-card">
+
+            <div class="food-image-wrap">
+
+                <img
+                    class="food-image"
+                    src="${food.image}"
+                    alt="${food.name}"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src=foodFallback('${escapeHtml(food.name)}')"
+                >
+
+                <button
+                    class="favorite ${isFavorite ? "active" : ""}"
+                    onclick="toggleFavorite(${food.id})"
+                    aria-label="Favorite">
+                    ${isFavorite ? "❤️" : "♡"}
+                </button>
+
+            </div>
+
+            <div class="food-info">
+
+                <h3>${food.name}</h3>
+
+                <p class="description">
+                    ${food.description}
+                </p>
+
+                <div class="tags">
+                    <span class="tag">${food.category}</span>
+                    <span class="tag">${food.cuisine}</span>
+                    <span class="tag">${food.unit}</span>
+                </div>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>${food.rating} (${food.ratings} ratings)</span>
+                </div>
+
+                <button
+                    class="review-link"
+                    onclick="showDetails(${food.id})">
+                    Read customer reviews →
+                </button>
+
+                <div class="card-bottom">
+                    <div class="price">₹${food.price}</div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart(${food.id})">
+                        + Add
+                    </button>
+                </div>
+
+            </div>
+        </article>
+        `;
+
+    }).join("");
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+   ========================================================= */
+
+function escapeHtml(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+function filterCategory(category, button){
+
+    activeCategory = category;
+
+    document.querySelectorAll(".filter-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    renderFoods();
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+function searchFood(){
+
+    renderFoods();
+
+    document.getElementById("menu")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+document.getElementById("searchInput")
+    .addEventListener("input", renderFoods);
+
+
+/* =========================================================
+   FAVORITES
+   ========================================================= */
+
+function toggleFavorite(id){
+
+    if(favorites.includes(id)){
+
+        favorites = favorites.filter(item => item !== id);
+
+        showToast("Removed from favorites");
+
+    }else{
+
+        favorites.push(id);
+
+        showToast("Added to favorites ❤️");
+    }
+
+    updateCounts();
+    renderFoods();
+}
+
+
+function showFavorites(){
+
+    if(favorites.length === 0){
+
+        showToast("No favorite items yet ❤️");
+        return;
+    }
+
+    const favoriteNames =
+        favorites
+        .map(id => foods.find(food => food.id === id)?.name)
+        .join(", ");
+
+    showToast("Favorites: " + favoriteNames);
+}
+
+
+/* =========================================================
+   CART
+   ========================================================= */
+
+function addToCart(id){
+
+    const existing = cart.find(item => item.id === id);
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+            id:id,
+            quantity:1
+        });
+    }
+
+    updateCounts();
+
+    showToast("Added to cart 🛒");
+}
+
+
+function changeQuantity(id, amount){
+
+    const item = cart.find(item => item.id === id);
+
+    if(!item) return;
+
+    item.quantity += amount;
+
+    if(item.quantity <= 0){
+
+        cart = cart.filter(item => item.id !== id);
+    }
+
+    updateCounts();
+    renderCart();
+}
+
+
+function removeFromCart(id){
+
+    cart = cart.filter(item => item.id !== id);
+
+    updateCounts();
+    renderCart();
+
+    showToast("Item removed");
+}
+
+
+function updateCounts(){
+
+    const count =
+        cart.reduce(
+            (sum,item) => sum + item.quantity,
+            0
+        );
+
+    document.getElementById("cartCount")
+        .textContent = count;
+
+    document.getElementById("favCount")
+        .textContent = favorites.length;
+}
+
+
+function getCartTotal(){
+
+    return cart.reduce((total,item) => {
+
+        const food =
+            foods.find(food => food.id === item.id);
+
+        return total + food.price * item.quantity;
+
+    },0);
+}
+
+
+function openCart(){
+
+    renderCart();
+
+    document.getElementById("cartModal")
+        .classList.add("show");
+}
+
+
+function renderCart(){
+
+    const container =
+        document.getElementById("cartItems");
+
+    if(cart.length === 0){
+
+        container.innerHTML = `
+            <div class="empty">
+                <h3>🛒 Your cart is empty</h3>
+                <p>Add some delicious food first.</p>
+            </div>
+        `;
+
+        document.getElementById("cartTotal")
+            .textContent = "₹0";
+
+        return;
+    }
+
+    container.innerHTML = cart.map(item => {
+
+        const food =
+            foods.find(food => food.id === item.id);
+
+        return `
+        <div class="cart-item">
+
+            <img
+                src="${food.image}"
+                alt="${food.name}"
+                onerror="this.onerror=null;this.src=foodFallback('${escapeHtml(food.name)}')">
+
+            <div class="cart-details">
+
+                <strong>${food.name}</strong>
+
+                <div>₹${food.price} × ${item.quantity}</div>
+
+                <div class="qty">
+
+                    <button onclick="changeQuantity(${food.id},-1)">
+                        −
+                    </button>
+
+                    <span>${item.quantity}</span>
+
+                    <button onclick="changeQuantity(${food.id},1)">
+                        +
+                    </button>
+
+                    <button
+                        class="remove"
+                        onclick="removeFromCart(${food.id})">
+                        Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+            <strong>
+                ₹${food.price * item.quantity}
+            </strong>
+
+        </div>
+        `;
+
+    }).join("");
+
+    document.getElementById("cartTotal")
+        .textContent = "₹" + getCartTotal();
+}
+
+
+/* =========================================================
+   CHECKOUT
+   ========================================================= */
+
+function openCheckout(){
+
+    if(cart.length === 0){
+
+        showToast("Your cart is empty");
+        return;
+    }
+
+    closeModal("cartModal");
+
+    document.getElementById("checkoutModal")
+        .classList.add("show");
+}
+
+
+function placeOrder(){
+
+    const name =
+        document.getElementById("customerName")
+        .value.trim();
+
+    const phone =
+        document.getElementById("customerPhone")
+        .value.trim();
+
+    const address =
+        document.getElementById("customerAddress")
+        .value.trim();
+
+    if(!name){
+
+        showToast("Please enter your name");
+        return;
+    }
+
+    if(!/^[6-9]\d{9}$/.test(phone)){
+
+        showToast("Enter a valid 10-digit Indian mobile number");
+        return;
+    }
+
+    if(!address){
+
+        showToast("Please enter your delivery address");
+        return;
+    }
+
+    const orderId =
+        "SK" + Math.floor(100000 + Math.random()*900000);
+
+    cart = [];
+
+    updateCounts();
+
+    closeModal("checkoutModal");
+
+    document.getElementById("orderMessage")
+        .innerHTML =
+        `
+        Order <strong>#${orderId}</strong> confirmed! 🎉
+        <br>
+        Your delicious food is being prepared.
+        `;
+
+    document.getElementById("trackingModal")
+        .classList.add("show");
+
+    showToast("Order placed successfully 🎉");
+}
+
+
+/* =========================================================
+   DETAILS / REVIEWS
+   ========================================================= */
+
+function showDetails(id){
+
+    const food =
+        foods.find(food => food.id === id);
+
+    if(!food) return;
+
+    document.getElementById("detailImage")
+        .src = food.image;
+
+    document.getElementById("detailImage")
+        .alt = food.name;
+
+    document.getElementById("detailImage")
+        .onerror = function(){
+
+            this.onerror = null;
+            this.src = foodFallback(food.name);
+        };
+
+    document.getElementById("detailName")
+        .textContent = food.name;
+
+    document.getElementById("detailDescription")
+        .textContent = food.description;
+
+    document.getElementById("detailPrice")
+        .textContent =
+        "₹" + food.price + " / " + food.unit;
+
+    document.getElementById("detailReview")
+        .textContent =
+        `"${food.review}"`;
+
+    document.getElementById("detailTags")
+        .innerHTML = `
+            <span class="tag">${food.category}</span>
+            <span class="tag">${food.cuisine}</span>
+            <span class="tag">★ ${food.rating}</span>
+        `;
+
+    document.getElementById("detailAddButton")
+        .onclick = function(){
+
+            addToCart(food.id);
+            closeModal("detailsModal");
+        };
+
+    document.getElementById("detailsModal")
+        .classList.add("show");
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+function openLogin(){
+
+    document.getElementById("loginModal")
+        .classList.add("show");
+}
+
+
+function login(){
+
+    const email =
+        document.getElementById("loginEmail")
+        .value.trim();
+
+    const password =
+        document.getElementById("loginPassword")
+        .value.trim();
+
+    if(!email || !password){
+
+        showToast("Please enter email and password");
+        return;
+    }
+
+    closeModal("loginModal");
+
+    showToast("Login successful 👋");
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+
+function closeModal(id){
+
+    document.getElementById(id)
+        .classList.remove("show");
+}
+
+
+document.querySelectorAll(".modal")
+    .forEach(modal => {
+
+        modal.addEventListener("click", function(event){
+
+            if(event.target === modal){
+
+                modal.classList.remove("show");
+            }
+        });
+
+    });
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        },2500);
+}
+
+
+/* =========================================================
+   IMAGE DUPLICATE CHECK
+   This makes sure two different foods aren't accidentally
+   assigned the same image URL.
+   ========================================================= */
+
+function checkForDuplicateImages(){
+
+    const seen = {};
+
+    foods.forEach(food => {
+
+        if(seen[food.image]){
+
+            console.warn(
+                "DUPLICATE IMAGE:",
+                food.name,
+                "and",
+                seen[food.image]
+            );
+
+        }else{
+
+            seen[food.image] = food.name;
+        }
+
+    });
+}
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+renderFoods();
+updateCounts();
+checkForDuplicateImages();
+
+</script>
+
+</body>
+</html>
